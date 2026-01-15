@@ -282,30 +282,26 @@ void main(String[] args) {
 }
 
 private static Fichario getFichario() {
-    Carta magoNegro =
-            new Carta("Mago Negro", 7, 2500, 2100);
-    Carta dragaoBranco =
-            new Carta("Dragão Branco de Olhos Azuis", 8, 3000, 2500);
-    Carta magoDoTempo =
-            new Carta("Mago do Tempo", 2, 500, 400);
-    Carta dragaoNegro =
-            new Carta("Dragão Negro de Olho Vermelhos", 7, 2400, 2000);
-    Carta magaNegra =
-            new Carta("Pequena Maga Negra", 6, 2000, 1700);
-    Carta guerreiroGuardiao =
-            new Carta("Guerreiro Guardião Celta", 4, 1400, 1200);
-    Carta ladyHarpia =
-            new Carta("Lady Harpia", 4, 1300, 1400);
-    Carta sparkman =
-            new Carta("SPARKMAN, HERÓI do Elemento", 4, 1600, 1400);
-    Carta kuriboh =
-            new Carta("Kuriboh", 1, 300, 200);
-    Carta dragaoBebe =
-            new Carta("Dragão Bebê", 3, 1200, 700);
+    Carta magoNegro = new Carta("Mago Negro", 7, 2500, 2100);
+    Carta dragaoBranco = new Carta("Dragão Branco de Olhos Azuis", 8, 3000, 2500);
+    Carta magoDoTempo = new Carta("Mago do Tempo", 2, 500, 400);
+    Carta dragaoNegro = new Carta("Dragão Negro de Olho Vermelhos", 7, 2400, 2000);
+    Carta magaNegra = new Carta("Pequena Maga Negra", 6, 2000, 1700);
+    Carta guerreiroGuardiao = new Carta("Guerreiro Guardião Celta", 4, 1400, 1200);
+    Carta ladyHarpia = new Carta("Lady Harpia", 4, 1300, 1400);
+    Carta sparkman = new Carta("SPARKMAN, HERÓI do Elemento", 4, 1600, 1400);
+    Carta kuriboh = new Carta("Kuriboh", 1, 300, 200);
+    Carta dragaoBebe = new Carta("Dragão Bebê", 3, 1200, 700);
+    Carta menteAliada = new Carta("Mente Aliada", 5, 1800, 1400);
+    Carta guardaFlamvell = new Carta("Guarda Flamvell", 1, 100, 2000);
+    Carta dragaoGuarda = new Carta("Dragão-Guarda Justícia", 2, 0, 2100);
+    Carta controladorGenex = new Carta("Controlador Genex", 3, 1400, 1200);
+    Carta guerreiroSintonia = new Carta("Guerreiro da Sintonia", 3, 1600, 200);
 
     Fichario fichario = new Fichario();
     fichario.adicionarCartas(magoNegro, dragaoBranco, magoDoTempo, dragaoNegro, magaNegra, guerreiroGuardiao,
-            ladyHarpia, sparkman, kuriboh, dragaoBebe);
+            ladyHarpia, sparkman, kuriboh, dragaoBebe, menteAliada, guardaFlamvell, dragaoGuarda, controladorGenex,
+            guerreiroSintonia);
 
     fichario.exibirCartasDisponiveis();
     return fichario;
