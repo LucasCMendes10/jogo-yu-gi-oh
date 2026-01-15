@@ -1,3 +1,5 @@
+package school.sptech;
+
 public class Carta {
     private String nome;
     private Integer qtdEstrela;
@@ -45,7 +47,7 @@ public class Carta {
 
     @Override
     public String toString() {
-        return "Carta{" +
+        return "school.sptech.Carta{" +
                 "nome='" + nome +
                 ", qtdEstrela=" + qtdEstrela +
                 ", ataque=" + ataque +

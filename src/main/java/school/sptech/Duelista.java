@@ -1,3 +1,5 @@
+package school.sptech;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -118,7 +120,7 @@ public abstract class Duelista {
 
     @Override
     public String toString() {
-        return "Duelista{" +
+        return "school.sptech.Duelista{" +
                 "nome='" + nome + '\'' +
                 ", pontosDeVida=" + pontosDeVida +
                 ", baralho=" + baralho +

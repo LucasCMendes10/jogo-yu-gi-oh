@@ -1,3 +1,7 @@
+import school.sptech.Computador;
+import school.sptech.Jogador;
+import school.sptech.Jogo;
+
 void main(String[] args) {
     Jogador jogador = new Jogador("Yugi Muto");
     Computador computador = new Computador("Seto Kaiba");

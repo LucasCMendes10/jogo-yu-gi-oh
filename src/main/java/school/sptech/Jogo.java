@@ -1,3 +1,5 @@
+package school.sptech;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -58,8 +60,8 @@ public class Jogo {
 
         IO.println("\n=== Nova Rodada ===");
         IO.println("\nStatus dos Jogadores:");
-        IO.println("Duelista 1: " + jogador.getNome() + " | Pontos de Vida: " + jogador.getPontosDeVida());
-        IO.println("Duelista 2: " + computador.getNome() + " | Pontos de Vida: " + computador.getPontosDeVida());
+        IO.println("school.sptech.Duelista 1: " + jogador.getNome() + " | Pontos de Vida: " + jogador.getPontosDeVida());
+        IO.println("school.sptech.Duelista 2: " + computador.getNome() + " | Pontos de Vida: " + computador.getPontosDeVida());
 
         IO.println("\n===================================");
         IO.println("Vez de " + jogador.getNome());
@@ -121,8 +123,8 @@ public class Jogo {
 
         IO.println("\n=== Nova Rodada ===");
         IO.println("\nStatus dos Jogadores:");
-        IO.println("Duelista 1: " + jogador.getNome() + " | Pontos de Vida: " + jogador.getPontosDeVida());
-        IO.println("Duelista 2: " + computador.getNome() + " | Pontos de Vida: " + computador.getPontosDeVida());
+        IO.println("school.sptech.Duelista 1: " + jogador.getNome() + " | Pontos de Vida: " + jogador.getPontosDeVida());
+        IO.println("school.sptech.Duelista 2: " + computador.getNome() + " | Pontos de Vida: " + computador.getPontosDeVida());
 
         IO.println("\n===================================");
         IO.println("Vez de " + jogador.getNome());

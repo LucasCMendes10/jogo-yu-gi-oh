@@ -1,3 +1,5 @@
+package school.sptech;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,7 +111,7 @@ public class Jogador extends Duelista {
             Integer posicaoCartaSacrificio = Integer.valueOf(IO.readln("Escolha a carta para sacrificar (1 a " + todasAsCartas.size() + "): "));
 
             while (posicaoCartaSacrificio.equals(posicaoCartaEscolhida) || cartasSacrificio.contains(todasAsCartas.get(posicaoCartaSacrificio - 1))) {
-                IO.println("Carta inválida. Escolha outra carta.");
+                IO.println("school.sptech.Carta inválida. Escolha outra carta.");
                 posicaoCartaSacrificio = Integer.valueOf(IO.readln("Escolha a carta para sacrificar (1 a " + todasAsCartas.size() + "): "));
             }
 
