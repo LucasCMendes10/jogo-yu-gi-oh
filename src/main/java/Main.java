@@ -14,9 +14,9 @@ void main(String[] args) {
         if (jogador.getPontosDeVida() <= 0 || computador.getPontosDeVida() <= 0) {
             jogoEmAndamento = false;
             Duelista vencedor = jogador.getPontosDeVida() > 0 ? jogador : computador;
-            IO.println("\n===================================");
+            IO.println("\n=============================================");
             IO.println("O jogo acabou! O vencedor é: " + vencedor.getNome());
-            IO.println("===================================");
+            IO.println("=============================================");
             continue;
         }
 
@@ -25,8 +25,8 @@ void main(String[] args) {
 
         IO.println("\n=== Nova Rodada ===");
         IO.println("\nStatus dos Jogadores:");
-        IO.println("Jogador 1: " + jogador.getNome() + " | Pontos de Vida: " + jogador.getPontosDeVida());
-        IO.println("Jogador 2: " + computador.getNome() + " | Pontos de Vida: " + computador.getPontosDeVida());
+        IO.println("Duelista 1: " + jogador.getNome() + " | Pontos de Vida: " + jogador.getPontosDeVida());
+        IO.println("Duelista 2: " + computador.getNome() + " | Pontos de Vida: " + computador.getPontosDeVida());
 
         if (contadorRodada == 1) {
             IO.println("\n===================================");
