@@ -199,11 +199,45 @@ void main(String[] args) {
             Integer opcaoEscolhida = (int) (Math.random() * 3 + 1);
 
             if (!computador.getCampo().isEmpty()) {
+                if (jogador.getCampo().isEmpty()) {
+                    opcaoEscolhida = 3;
+                } else {
+                    List<Carta> cartasDerrotaveis = new ArrayList<>();
+
+                    for (Carta cartaComputador : computador.getCampo()) {
+                        for (int i = 0; i < jogador.getCampo().size(); i++) {
+                            if (cartaComputador.getAtaque() > jogador.getCampo().get(i).getDefesa()) {
+                                cartasDerrotaveis.add(jogador.getCampo().get(i));
+                            }
+                        }
+                    }
+
+                    if (!cartasDerrotaveis.isEmpty()) {
+                        Carta cartaMaisFraca = cartasDerrotaveis.getFirst();
+
+                        for (Carta carta : cartasDerrotaveis) {
+                            if (cartaMaisFraca.getDefesa() > carta.getDefesa()) {
+                                cartaMaisFraca = carta;
+                            }
+                        }
+
+                        IO.println("\nAção escolhida: Atacar");
+                        computador.atacar(jogador, cartaMaisFraca);
+                        computador.exibirCampo();
+                        continue;
+                    } else {
+                        if (computador.getMao().isEmpty()) {
+                            opcaoEscolhida = 1;
+                        } else {
+                            opcaoEscolhida = 2;
+                        }
+                    }
+                }
+
                 switch (opcaoEscolhida) {
                     case 1:
-                        IO.println("\nAção escolhida: Atacar");
-                        computador.atacar(jogador);
-                        computador.exibirCampo();
+                        IO.println("\nAção escolhida: Comprar carta");
+                        computador.comprarCarta();
                         break;
                     case 2:
                         IO.println("\nAção escolhida: Jogar carta");

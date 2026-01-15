@@ -116,6 +116,28 @@ public class Computador extends Duelista {
         }
     }
 
+    public void atacar(Duelista oponente, Carta alvo) {
+        exibirCampo();
+        IO.println(nome + " está escolhendo uma carta para atacar...");
+
+        Carta cartaMaisForte = this.getCampo().getFirst();
+
+        for (Carta carta : this.getCampo()) {
+            if (cartaMaisForte.getAtaque() < carta.getAtaque()) {
+                cartaMaisForte = carta;
+            }
+        }
+
+        Carta cartaAtacante = cartaMaisForte;
+        IO.println(nome + " escolheu " + cartaAtacante.getNome() + " para atacar.");
+
+        IO.println("Há cartas no campo do oponente para defender.");
+        oponente.exibirCampo();
+        IO.println(nome + " está sscolhendo uma das suas cartas para atacar...");
+        IO.println(nome + " escolheu atacar a carta: " + alvo.getNome());
+        oponente.receberAtaque(cartaAtacante, alvo, this);
+    }
+
     public Carta jogadaEspecial(Predicate<Carta> condicao) {
         for (Carta carta : mao) {
             if (condicao.test(carta)) {
