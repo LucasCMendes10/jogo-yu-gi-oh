@@ -1,8 +1,6 @@
 package school.sptech;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 import static school.sptech.Carta.criarCarta;
 
@@ -147,23 +145,22 @@ public class Jogo {
             Integer opcaoEscolhida = Integer.valueOf(IO.readln("Escolha uma ação: "));
 
             switch (opcaoEscolhida) {
-                case 1:
+                case 1 -> {
                     IO.println("\nAção escolhida: Comprar carta");
                     jogador.comprarCarta();
                     jogador.exibirMao();
-                    break;
-                case 2:
+                }
+                case 2 -> {
                     IO.println("\nAção escolhida: Jogar carta");
                     jogador.jogarCarta(new ArrayList<>());
                     jogador.exibirCampo();
-                    break;
-                case 3:
+                }
+                case 3 -> {
                     IO.println("\nAção escolhida: Atacar");
                     jogador.atacar(computador);
                     jogador.exibirCampo();
-                    break;
-                default:
-                    IO.println("Opção inválida. Tente novamente.");
+                }
+                default -> IO.println("Opção inválida. Tente novamente.");
             }
         } catch (NumberFormatException ex) {
             IO.println("Opção inválida. Tente novamente.");
@@ -181,144 +178,8 @@ public class Jogo {
         computador.exibirCampo();
         jogador.exibirCampo();
 
-        IO.println("""
-                \nOpções de ação:
-                1. Comprar carta
-                2. Jogar carta
-                3. Atacar
-                """);
-
-        try {
-            IO.println("O computador irá escolher uma ação...");
-
-            if (computador.getMao().isEmpty() && computador.getCampo().isEmpty()) {
-                IO.println("\nAção escolhida: Comprar carta");
-                computador.comprarCarta();
-                return;
-            } else if (!computador.getMao().isEmpty() && computador.getCampo().isEmpty()) {
-                Integer qtdCartasQueNaoPrecisamDeSacrificio = 0;
-                Integer qtdCartasQuePrecisamDe1Sacrificio = 0;
-                Integer qtdCartasQuePrecisamDe2Sacrificios = 0;
-
-                for (Carta carta : computador.getMao()) {
-                    if (carta.getQtdEstrela() < 5) {
-                        qtdCartasQueNaoPrecisamDeSacrificio++;
-                    } else if (carta.getQtdEstrela() <= 6) {
-                        qtdCartasQuePrecisamDe1Sacrificio++;
-                    } else {
-                        qtdCartasQuePrecisamDe2Sacrificios++;
-                    }
-                }
-
-                if (qtdCartasQuePrecisamDe2Sacrificios > 0 && qtdCartasQueNaoPrecisamDeSacrificio >= 2) {
-                    Carta cartaParaJogar = computador.jogadaEspecial(carta -> carta.getQtdEstrela() >= 7);
-
-                    IO.println("\nAção escolhida: Jogar carta");
-                    computador.jogarCarta(cartaParaJogar);
-                    computador.exibirCampo();
-                    return;
-                } else if (qtdCartasQuePrecisamDe1Sacrificio > 0 && qtdCartasQueNaoPrecisamDeSacrificio >= 1) {
-                    Carta cartaParaJogar = computador.jogadaEspecial(carta -> carta.getQtdEstrela() == 5 || carta.getQtdEstrela() == 6);
-
-                    IO.println("\nAção escolhida: Jogar carta");
-                    computador.jogarCarta(cartaParaJogar);
-                    computador.exibirCampo();
-                    return;
-                }
-
-                Carta cartaParaJogar = computador.jogadaEspecial(carta -> carta.getQtdEstrela() <= 4);
-
-                if (Objects.isNull(cartaParaJogar)) {
-                    IO.println("\nAção escolhida: Comprar carta");
-                    computador.comprarCarta();
-                    return;
-                }
-
-                IO.println("\nAção escolhida: Jogar carta");
-                computador.jogarCarta(cartaParaJogar);
-                computador.exibirCampo();
-                return;
-            }
-
-            Integer opcaoEscolhida = (int) (Math.random() * 3 + 1);
-
-            if (!computador.getCampo().isEmpty()) {
-                if (jogador.getCampo().isEmpty()) {
-                    opcaoEscolhida = 3;
-                } else {
-                    List<Carta> cartasDerrotaveis = new ArrayList<>();
-
-                    for (Carta cartaComputador : computador.getCampo()) {
-                        for (int i = 0; i < jogador.getCampo().size(); i++) {
-                            if (cartaComputador.getAtaque() > jogador.getCampo().get(i).getDefesa()) {
-                                cartasDerrotaveis.add(jogador.getCampo().get(i));
-                            }
-                        }
-                    }
-
-                    if (!cartasDerrotaveis.isEmpty()) {
-                        Carta cartaMaisFraca = cartasDerrotaveis.getFirst();
-
-                        for (Carta carta : cartasDerrotaveis) {
-                            if (cartaMaisFraca.getDefesa() > carta.getDefesa()) {
-                                cartaMaisFraca = carta;
-                            }
-                        }
-
-                        IO.println("\nAção escolhida: Atacar");
-                        computador.atacar(jogador, cartaMaisFraca);
-                        computador.exibirCampo();
-                        return;
-                    } else {
-                        if (computador.getMao().isEmpty()) {
-                            opcaoEscolhida = 1;
-                        } else {
-                            opcaoEscolhida = 2;
-                        }
-                    }
-                }
-
-                switch (opcaoEscolhida) {
-                    case 1:
-                        IO.println("\nAção escolhida: Comprar carta");
-                        computador.comprarCarta();
-                        break;
-                    case 2:
-                        IO.println("\nAção escolhida: Jogar carta");
-                        computador.jogarCarta(new ArrayList<>());
-                        computador.exibirCampo();
-                        break;
-                    case 3:
-                        IO.println("\nAção escolhida: Atacar");
-                        computador.atacar(jogador);
-                        computador.exibirCampo();
-                        break;
-                    default:
-                        IO.println("Opção inválida. Tente novamente.");
-                }
-            } else {
-                switch (opcaoEscolhida) {
-                    case 1:
-                        IO.println("\nAção escolhida: Comprar carta");
-                        computador.comprarCarta();
-                        break;
-                    case 2:
-                        IO.println("\nAção escolhida: Jogar carta");
-                        computador.jogarCarta(new ArrayList<>());
-                        computador.exibirCampo();
-                        break;
-                    case 3:
-                        IO.println("\nAção escolhida: Atacar");
-                        computador.atacar(jogador);
-                        computador.exibirCampo();
-                        break;
-                    default:
-                        IO.println("Opção inválida. Tente novamente.");
-                }
-            }
-        } catch (NumberFormatException ex) {
-            IO.println("Opção inválida. Tente novamente.");
-        }
+        computador.executarTurno(jogador);
+        computador.exibirCampo();
     }
 
     private void encerrarJogo() {
