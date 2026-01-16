@@ -8,7 +8,7 @@ import java.lang.reflect.Method;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Testes da classe Carta")
-class CartaTeste {
+class CartaTest {
 
     @Test
     @DisplayName("Construtor deve criar carta corretamente com todos os atributos informados")
