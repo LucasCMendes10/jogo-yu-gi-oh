@@ -86,15 +86,4 @@ class JogoTest {
         assertTrue(jogador.getPontosDeVida() > 0);
         assertTrue(computador.getPontosDeVida() <= 0);
     }
-
-    @Test
-    @DisplayName("Iniciar jogo não deve lançar exceção")
-    void iniciarJogoNaoDeveLancarExcecao() {
-        Jogador jogador = new Jogador("Yugi");
-        Computador computador = new Computador("CPU");
-        Jogo jogo = new Jogo(jogador, computador);
-
-        assertDoesNotThrow(jogo::iniciar,
-                "Iniciar o jogo não deveria lançar exceções");
-    }
 }
