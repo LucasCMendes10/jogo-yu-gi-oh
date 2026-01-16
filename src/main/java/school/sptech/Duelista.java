@@ -18,11 +18,11 @@ public abstract class Duelista {
         this.campo = new ArrayList<>();
     }
 
-    abstract void comprarCarta();
+    protected abstract void comprarCarta();
 
-    abstract void jogarCarta(List<Integer> posicoesCartasEscolhidas);
+    protected abstract void jogarCarta(List<Integer> posicoesCartasEscolhidas);
 
-    abstract void atacar(Duelista oponente);
+    protected abstract void atacar(Duelista oponente);
 
     public void embaralhar() {
         if (baralho.isEmpty()) {
