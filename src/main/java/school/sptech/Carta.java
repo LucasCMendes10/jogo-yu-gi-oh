@@ -17,32 +17,16 @@ public class Carta {
         return nome;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public Integer getQtdEstrela() {
         return qtdEstrela;
-    }
-
-    public void setQtdEstrela(Integer qtdEstrela) {
-        this.qtdEstrela = qtdEstrela;
     }
 
     public Integer getAtaque() {
         return ataque;
     }
 
-    public void setAtaque(Integer ataque) {
-        this.ataque = ataque;
-    }
-
     public Integer getDefesa() {
         return defesa;
-    }
-
-    public void setDefesa(Integer defesa) {
-        this.defesa = defesa;
     }
 
     @Override
