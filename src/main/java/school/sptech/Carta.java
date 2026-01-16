@@ -1,5 +1,7 @@
 package school.sptech;
 
+import static java.util.Objects.isNull;
+
 public class Carta {
     private String nome;
     private Integer qtdEstrela;
@@ -11,6 +13,24 @@ public class Carta {
         this.qtdEstrela = qtdEstrela;
         this.ataque = ataque;
         this.defesa = defesa;
+    }
+
+    public static Carta criarCarta(String nome, Integer qtdEstrela, Integer ataque, Integer defesa) {
+        if (validacoesNullPointer(nome, qtdEstrela, ataque, defesa)) {
+            throw new NullPointerException();
+        } else if (validacoesIllegalArgument(nome, qtdEstrela, ataque, defesa)) {
+            throw new IllegalArgumentException();
+        }
+
+        return new Carta(nome, qtdEstrela, ataque, defesa);
+    }
+
+    private static Boolean validacoesNullPointer(String nome, Integer qtdEstrela, Integer ataque, Integer defesa) {
+        return isNull(nome) || isNull(qtdEstrela) || isNull(ataque) || isNull(defesa);
+    }
+
+    private static Boolean validacoesIllegalArgument(String nome, Integer qtdEstrela, Integer ataque, Integer defesa) {
+        return nome.isBlank() || qtdEstrela <= 0 || qtdEstrela > 12 || ataque < 100 || defesa < 100;
     }
 
     public String getNome() {
