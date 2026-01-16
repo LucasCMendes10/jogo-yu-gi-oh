@@ -16,7 +16,7 @@ public class Fichario {
 
     public void adicionarCartas(Carta... novasCartas) {
         for (Carta novasCarta : novasCartas) {
-            cartas.add(novasCarta);
+            adicionarCarta(novasCarta);
         }
     }
 
@@ -26,7 +26,7 @@ public class Fichario {
 
     public void removerCartas(Carta... novasCartas) {
         for (Carta novasCarta : novasCartas) {
-            cartas.remove(novasCarta);
+            removerCarta(novasCarta);
         }
     }
 
