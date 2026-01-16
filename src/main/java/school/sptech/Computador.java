@@ -35,11 +35,21 @@ public class Computador extends Duelista {
         }
 
         IO.println(nome + " está escolhendo uma carta para jogar...");
-        Integer posicaoCartaEscolhida = (int) (Math.random() * mao.size());
 
-        while (posicoesCartasEscolhidas.contains(posicaoCartaEscolhida)) {
-            posicaoCartaEscolhida = (int) (Math.random() * mao.size());
+        List<Integer> posicoesDisponiveis = new ArrayList<>();
+
+        for (int i = 0; i < mao.size(); i++) {
+            if (!posicoesCartasEscolhidas.contains(i)) {
+                posicoesDisponiveis.add(i);
+            }
         }
+
+        if (posicoesDisponiveis.isEmpty()) {
+            IO.println(nome + " não tem cartas válidas para jogar. Pulando a jogada...");
+            return;
+        }
+
+        Integer posicaoCartaEscolhida = posicoesDisponiveis.get((int) (Math.random() * posicoesDisponiveis.size()));
 
         Carta cartaEscolhida = mao.get(posicaoCartaEscolhida);
         posicoesCartasEscolhidas.add(posicaoCartaEscolhida);
