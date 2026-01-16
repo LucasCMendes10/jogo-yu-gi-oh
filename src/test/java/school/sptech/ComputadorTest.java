@@ -53,7 +53,7 @@ public class ComputadorTest {
 
     @Test
     @DisplayName("Montar baralho deve adicionar exatamente o tamanho informado pelo jogador")
-    void montarBaralhoCorretamente() {
+    void montarBaralhoCorretamente() throws InterruptedException {
         Computador cpu = new Computador("CPU");
 
         List<Carta> cartas = new ArrayList<>(List.of(
@@ -67,7 +67,7 @@ public class ComputadorTest {
 
     @Test
     @DisplayName("Comprar carta deve mover carta do baralho para a mão")
-    void comprarCartaComSucesso() {
+    void comprarCartaComSucesso() throws InterruptedException {
         Computador cpu = new Computador("CPU");
         cpu.getBaralho().add(cartaFraca());
 
@@ -79,7 +79,7 @@ public class ComputadorTest {
 
     @Test
     @DisplayName("Comprar carta com baralho vazio não deve alterar estado")
-    void comprarCartaSemBaralho() {
+    void comprarCartaSemBaralho() throws InterruptedException {
         Computador cpu = new Computador("CPU");
 
         cpu.comprarCarta();
@@ -89,7 +89,7 @@ public class ComputadorTest {
 
     @Test
     @DisplayName("Jogada simples deve mover carta da mão para o campo")
-    void jogarCartaSimples() {
+    void jogarCartaSimples() throws InterruptedException {
         Computador cpu = new Computador("CPU");
         cpu.getMao().add(cartaFraca());
 
@@ -145,7 +145,7 @@ public class ComputadorTest {
 
     @Test
     @DisplayName("Deve invocar carta que exige 1 sacrifício quando houver cartas suficientes")
-    void deveInvocarComUmSacrificio() {
+    void deveInvocarComUmSacrificio() throws InterruptedException {
         Computador cpu = new Computador("CPU");
 
         Carta sacrificio = cartaFraca();
@@ -162,7 +162,7 @@ public class ComputadorTest {
 
     @Test
     @DisplayName("Deve invocar carta que exige 2 sacrifícios quando houver cartas suficientes")
-    void deveInvocarComDoisSacrificios() {
+    void deveInvocarComDoisSacrificios() throws InterruptedException {
         Computador cpu = new Computador("CPU");
 
         Carta sacrificio1 = cartaFraca();
@@ -197,7 +197,7 @@ public class ComputadorTest {
 
     @Test
     @DisplayName("Jogada especial deve retornar carta que atende condição")
-    void jogadaEspecialComSucesso() {
+    void jogadaEspecialComSucesso() throws InterruptedException {
         Computador cpu = new Computador("CPU");
         Carta alvo = cartaMedia();
 
@@ -211,7 +211,7 @@ public class ComputadorTest {
 
     @Test
     @DisplayName("Jogada especial deve retornar null se nenhuma carta atender condição")
-    void jogadaEspecialSemResultado() {
+    void jogadaEspecialSemResultado() throws InterruptedException {
         Computador cpu = new Computador("CPU");
         cpu.getMao().add(cartaFraca());
 
@@ -222,7 +222,7 @@ public class ComputadorTest {
 
     @Test
     @DisplayName("jogarCarta com ataque direto deve reduzir pontos de vida do oponente")
-    void ataqueDiretoFunciona() {
+    void ataqueDiretoFunciona() throws InterruptedException {
         Computador cpu = new Computador("CPU");
         Computador alvo = new Computador("ALVO");
 
@@ -236,7 +236,7 @@ public class ComputadorTest {
 
     @Test
     @DisplayName("jogarCarta(Carta) sem sacrifício deve invocar corretamente")
-    void jogarCartaDiretaSemSacrificio() {
+    void jogarCartaDiretaSemSacrificio() throws InterruptedException {
         Computador cpu = new Computador("CPU");
         Carta carta = cartaFraca();
 
@@ -250,7 +250,7 @@ public class ComputadorTest {
 
     @Test
     @DisplayName("jogarCarta(Carta) com sacrifício deve invocar corretamente")
-    void jogarCartaDiretaComSacrificio() {
+    void jogarCartaDiretaComSacrificio() throws InterruptedException {
         Computador cpu = new Computador("CPU");
 
         Carta sacrificio = cartaFraca();
@@ -268,7 +268,7 @@ public class ComputadorTest {
 
     @Test
     @DisplayName("Ataque contra carta defensora deve remover carta derrotada")
-    void ataqueComDefensor() {
+    void ataqueComDefensor() throws InterruptedException {
         Computador atacante = new Computador("ATK");
         Computador defensor = new Computador("DEF");
 
@@ -286,7 +286,7 @@ public class ComputadorTest {
 
     @Test
     @DisplayName("executarTurno deve comprar carta quando mão e campo estão vazios")
-    void executarTurnoComTudoVazio() {
+    void executarTurnoComTudoVazio() throws InterruptedException {
         Computador cpu = new Computador("CPU");
         Computador oponente = new Computador("OP");
 
@@ -299,7 +299,7 @@ public class ComputadorTest {
 
     @Test
     @DisplayName("executarTurno deve atacar quando oponente não tem campo")
-    void executarTurnoAtacaDireto() {
+    void executarTurnoAtacaDireto() throws InterruptedException {
         Computador cpu = new Computador("CPU");
         Computador alvo = new Computador("ALVO");
 

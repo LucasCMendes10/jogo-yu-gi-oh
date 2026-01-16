@@ -51,7 +51,7 @@ public class Carta {
 
     @Override
     public String toString() {
-        return "school.sptech.Carta{" +
+        return "Carta{" +
                 "nome='" + nome +
                 ", qtdEstrela=" + qtdEstrela +
                 ", ataque=" + ataque +

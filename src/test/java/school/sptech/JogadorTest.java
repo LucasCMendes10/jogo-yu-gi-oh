@@ -92,7 +92,7 @@ class JogadorTest {
 
     @Test
     @DisplayName("atacar não deve causar efeito quando campo estiver vazio")
-    void atacarComCampoVazio() {
+    void atacarComCampoVazio() throws InterruptedException {
         Jogador atacante = new Jogador("Yugi");
         Jogador defensor = new Jogador("Kaiba");
 

@@ -17,7 +17,7 @@ public class Jogo {
         this.jogoEmAndamento = true;
     }
 
-    public void iniciar() {
+    public void iniciar() throws InterruptedException {
         setFichario();
         this.fichario.exibirCartasDisponiveis();
         jogador.montarBaralho(this.fichario.getCartas());
@@ -36,7 +36,7 @@ public class Jogo {
         Carta magoNegro = criarCarta("Mago Negro", 7, 2500, 2100);
         Carta dragaoBranco = criarCarta("Dragão Branco de Olhos Azuis", 8, 3000, 2500);
         Carta magoDoTempo = criarCarta("Mago do Tempo", 2, 500, 400);
-        Carta dragaoNegro = criarCarta("Dragão Negro de Olho Vermelhos", 7, 2400, 2000);
+        Carta dragaoNegro = criarCarta("Dragão Negro de Olhos Vermelhos", 7, 2400, 2000);
         Carta magaNegra = criarCarta("Pequena Maga Negra", 6, 2000, 1700);
         Carta guerreiroGuardiao = criarCarta("Guerreiro Guardião Celta", 4, 1400, 1200);
         Carta ladyHarpia = criarCarta("Lady Harpia", 4, 1300, 1400);
@@ -54,22 +54,34 @@ public class Jogo {
                 guerreiroSintonia);
     }
 
-    private void realizarPrimeiraRodada() {
+    private void realizarPrimeiraRodada() throws InterruptedException {
+        Thread.sleep(1000);
+        IO.println("\nIniciando duelo entre " + jogador.getNome() + " e " + computador.getNome() + "...");
+        Thread.sleep(2000);
+        IO.println("Boa sorte duelistas!\n");
+        Thread.sleep(2000);
+
+        IO.println("Embaralhando os baralhos...");
         jogador.embaralhar();
         computador.embaralhar();
+        Thread.sleep(1000);
 
         IO.println("\n=== Nova Rodada ===");
         IO.println("\nStatus dos Jogadores:");
-        IO.println("school.sptech.Duelista 1: " + jogador.getNome() + " | Pontos de Vida: " + jogador.getPontosDeVida());
-        IO.println("school.sptech.Duelista 2: " + computador.getNome() + " | Pontos de Vida: " + computador.getPontosDeVida());
+        IO.println("Duelista 1: " + jogador.getNome() + " | Pontos de Vida: " + jogador.getPontosDeVida());
+        IO.println("Duelista 2: " + computador.getNome() + " | Pontos de Vida: " + computador.getPontosDeVida());
+        Thread.sleep(2000);
 
         IO.println("\n===================================");
         IO.println("Vez de " + jogador.getNome());
         IO.println("===================================");
+        Thread.sleep(2000);
         IO.println("\nSituação do jogo:");
         jogador.exibirMao();
         jogador.exibirCampo();
         computador.exibirCampo();
+
+        Thread.sleep(2000);
 
         IO.println("""
                 \nOpções de ação:
@@ -81,8 +93,11 @@ public class Jogo {
 
             if (opcaoEscolhida == 1) {
                 IO.println("\nAção escolhida: Comprar carta");
+                Thread.sleep(1500);
                 jogador.comprarCarta();
+                Thread.sleep(2000);
                 jogador.exibirMao();
+                Thread.sleep(3000);
             } else {
                 IO.println("Opção inválida. Tente novamente.");
             }
@@ -94,9 +109,12 @@ public class Jogo {
         IO.println("\n===================================");
         IO.println("Vez de " + computador.getNome());
         IO.println("===================================");
+        Thread.sleep(2000);
         IO.println("\nSituação do jogo:");
         computador.exibirCampo();
         jogador.exibirCampo();
+
+        Thread.sleep(2000);
 
         IO.println("""
                 \nOpções de ação:
@@ -104,35 +122,43 @@ public class Jogo {
                 """);
 
         try {
+            Thread.sleep(1500);
             IO.println("O computador irá escolher uma ação...");
-            IO.println("\nAção escolhida: Comprar carta");
+            Thread.sleep(2500);
             computador.comprarCarta();
+            Thread.sleep(2000);
         } catch (NumberFormatException ex) {
             IO.println("Opção inválida. Tente novamente.");
         }
     }
 
-    private void realizarRodada() {
+    private void realizarRodada() throws InterruptedException {
         if (jogador.getPontosDeVida() <= 0 || computador.getPontosDeVida() <= 0) {
             jogoEmAndamento = false;
             return;
         }
 
+        IO.println("\nEmbaralhando os baralhos...");
         jogador.embaralhar();
         computador.embaralhar();
+        Thread.sleep(1000);
 
         IO.println("\n=== Nova Rodada ===");
         IO.println("\nStatus dos Jogadores:");
-        IO.println("school.sptech.Duelista 1: " + jogador.getNome() + " | Pontos de Vida: " + jogador.getPontosDeVida());
-        IO.println("school.sptech.Duelista 2: " + computador.getNome() + " | Pontos de Vida: " + computador.getPontosDeVida());
+        IO.println("Duelista 1: " + jogador.getNome() + " | Pontos de Vida: " + jogador.getPontosDeVida());
+        IO.println("Duelista 2: " + computador.getNome() + " | Pontos de Vida: " + computador.getPontosDeVida());
+        Thread.sleep(2000);
 
         IO.println("\n===================================");
         IO.println("Vez de " + jogador.getNome());
         IO.println("===================================");
+        Thread.sleep(2000);
         IO.println("\nSituação do jogo:");
         jogador.exibirMao();
         jogador.exibirCampo();
         computador.exibirCampo();
+
+        Thread.sleep(2000);
 
         IO.println("""
                 \nOpções de ação:
@@ -147,18 +173,27 @@ public class Jogo {
             switch (opcaoEscolhida) {
                 case 1 -> {
                     IO.println("\nAção escolhida: Comprar carta");
+                    Thread.sleep(1500);
                     jogador.comprarCarta();
+                    Thread.sleep(2000);
                     jogador.exibirMao();
+                    Thread.sleep(3000);
                 }
                 case 2 -> {
                     IO.println("\nAção escolhida: Jogar carta");
+                    Thread.sleep(1500);
                     jogador.jogarCarta(new ArrayList<>());
+                    Thread.sleep(2000);
                     jogador.exibirCampo();
+                    Thread.sleep(3000);
                 }
                 case 3 -> {
                     IO.println("\nAção escolhida: Atacar");
+                    Thread.sleep(1500);
                     jogador.atacar(computador);
+                    Thread.sleep(2000);
                     jogador.exibirCampo();
+                    Thread.sleep(3000);
                 }
                 default -> IO.println("Opção inválida. Tente novamente.");
             }
@@ -174,12 +209,24 @@ public class Jogo {
         IO.println("\n===================================");
         IO.println("Vez de " + computador.getNome());
         IO.println("===================================");
+        Thread.sleep(2000);
         IO.println("\nSituação do jogo:");
         computador.exibirCampo();
         jogador.exibirCampo();
 
+        Thread.sleep(3000);
+
+        IO.println("""
+                \nOpções de ação:
+                1. Comprar carta
+                2. Jogar carta
+                3. Atacar
+                """);
+
         computador.executarTurno(jogador);
+        Thread.sleep(2000);
         computador.exibirCampo();
+        Thread.sleep(2000);
     }
 
     private void encerrarJogo() {

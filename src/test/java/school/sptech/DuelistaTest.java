@@ -76,7 +76,7 @@ class DuelistaTest {
 
     @Test
     @DisplayName("invocarCarta deve mover carta da mão para o campo")
-    void invocarCartaDeveMoverCartaDaMaoParaOCampo() {
+    void invocarCartaDeveMoverCartaDaMaoParaOCampo() throws InterruptedException {
         Duelista duelista = new DuelistaFake("Yugi");
         Carta carta = Carta.criarCarta("Mago Negro", 7, 2500, 2100);
 
@@ -92,7 +92,7 @@ class DuelistaTest {
 
     @Test
     @DisplayName("invocarCarta com sacrifícios deve remover sacrifícios e invocar o monstro")
-    void invocarCartaComSacrificios() {
+    void invocarCartaComSacrificios() throws InterruptedException {
         Duelista duelista = new DuelistaFake("Yugi");
 
         Carta sacrificio1 = Carta.criarCarta("S1", 4, 1000, 1000);
@@ -113,7 +113,7 @@ class DuelistaTest {
 
     @Test
     @DisplayName("receberAtaque direto deve reduzir pontos de vida corretamente")
-    void receberAtaqueDireto() {
+    void receberAtaqueDireto() throws InterruptedException {
         Duelista duelista = new DuelistaFake("Joey");
         Carta atacante = Carta.criarCarta("Dragão Negro de Olhos Vermelhos", 5, 1500, 1200);
 
@@ -124,7 +124,7 @@ class DuelistaTest {
 
     @Test
     @DisplayName("receberAtaque com defesa menor deve destruir defensora e causar dano")
-    void ataqueComDefesaMenor() {
+    void ataqueComDefesaMenor() throws InterruptedException {
         Duelista defensor = new DuelistaFake("Yugi");
         Duelista atacante = new DuelistaFake("Kaiba");
 
@@ -141,7 +141,7 @@ class DuelistaTest {
 
     @Test
     @DisplayName("Quando ataque for menor que a defesa, atacante deve perder pontos de vida")
-    void ataqueMenorQueDefesa() {
+    void ataqueMenorQueDefesa() throws InterruptedException {
         Duelista defensor = new DuelistaFake("Yugi");
         Duelista atacante = new DuelistaFake("Kaiba");
 
@@ -164,7 +164,7 @@ class DuelistaTest {
 
     @Test
     @DisplayName("Quando ataque for igual à defesa, ambas as cartas devem ser destruídas sem perda de vida")
-    void ataqueIgualADefesa() {
+    void ataqueIgualADefesa() throws InterruptedException {
         Duelista defensor = new DuelistaFake("Yugi");
         Duelista atacante = new DuelistaFake("Kaiba");
 

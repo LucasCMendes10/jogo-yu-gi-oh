@@ -32,7 +32,7 @@ class JogoTest {
 
     @Test
     @DisplayName("Jogo deve encerrar quando pontos de vida do jogador chegam a zero")
-    void jogoDeveEncerrarQuandoJogadorMorre() {
+    void jogoDeveEncerrarQuandoJogadorMorre() throws InterruptedException {
         Jogador jogador = new Jogador("Yugi");
         Computador computador = new Computador("CPU");
 
@@ -46,7 +46,7 @@ class JogoTest {
 
     @Test
     @DisplayName("Jogo deve encerrar quando pontos de vida do computador chegam a zero")
-    void jogoDeveEncerrarQuandoComputadorMorre() {
+    void jogoDeveEncerrarQuandoComputadorMorre() throws InterruptedException {
         Jogador jogador = new Jogador("Yugi");
         Computador computador = new Computador("CPU");
 
@@ -75,7 +75,7 @@ class JogoTest {
 
     @Test
     @DisplayName("Vencedor deve ser o jogador quando computador perde toda a vida")
-    void vencedorDeveSerJogador() {
+    void vencedorDeveSerJogador() throws InterruptedException {
         Jogador jogador = new Jogador("Yugi");
         Computador computador = new Computador("CPU");
 

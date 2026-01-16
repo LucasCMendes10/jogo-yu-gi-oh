@@ -9,28 +9,35 @@ public class Computador extends Duelista {
         super(nome);
     }
 
-    public void montarBaralho(List<Carta> cartas, Integer tamanhoBaralhoJogador) {
+    public void montarBaralho(List<Carta> cartas, Integer tamanhoBaralhoJogador) throws InterruptedException {
+        Thread.sleep(500);
+        IO.println("\nMontando o baralho do computador...");
         java.util.Collections.shuffle(cartas);
         for (int i = 0; i < tamanhoBaralhoJogador; i++) {
             this.baralho.add(cartas.get(i));
         }
+        Thread.sleep(1800);
+        IO.println("Baralho do computador montado com " + tamanhoBaralhoJogador + " cartas.");
+        Thread.sleep(1000);
     }
 
     @Override
-    public void comprarCarta() {
+    public void comprarCarta() throws InterruptedException {
         IO.println("\nAção escolhida: Comprar carta");
         if (!baralho.isEmpty()) {
             IO.println(nome + " está comprando uma carta...");
+            Thread.sleep(3000);
             Carta cartaComprada = baralho.removeFirst();
             mao.add(cartaComprada);
             IO.println("Uma nova carta foi comprada por " + nome + ".");
         } else {
+            Thread.sleep(1000);
             IO.println(nome + " não tem mais cartas no baralho para comprar.");
         }
     }
 
     @Override
-    public void jogarCarta(List<Integer> posicoesCartasEscolhidas) {
+    public void jogarCarta(List<Integer> posicoesCartasEscolhidas) throws InterruptedException {
         IO.println("\nAção escolhida: Jogar carta");
 
         if (mao.isEmpty()) {
@@ -39,6 +46,7 @@ public class Computador extends Duelista {
         }
 
         IO.println(nome + " está escolhendo uma carta para jogar...");
+        Thread.sleep(1500);
 
         List<Integer> posicoesDisponiveis = new ArrayList<>();
 
@@ -106,26 +114,33 @@ public class Computador extends Duelista {
     }
 
     @Override
-    public void atacar(Duelista oponente) {
+    public void atacar(Duelista oponente) throws InterruptedException {
         IO.println("\nAção escolhida: Atacar");
+
         if (campo.isEmpty()) {
+            Thread.sleep(1000);
             IO.println(nome + " não tem cartas no campo para atacar.");
             return;
         }
 
         exibirCampo();
         IO.println(nome + " está escolhendo uma carta para atacar...");
+        Thread.sleep(1500);
+
         Integer posicaoCartaAtacante = (int) (Math.random() * mao.size());
         Carta cartaAtacante = campo.get(posicaoCartaAtacante);
         IO.println(nome + " escolheu " + cartaAtacante.getNome() + " para atacar.");
 
+        Thread.sleep(800);
         if (oponente.getCampo().isEmpty()) {
             IO.println(oponente.getNome() + " não tem cartas no campo para se defender.");
             oponente.receberAtaque(cartaAtacante);
         } else {
             IO.println("Há cartas no campo do oponente para defender.");
             oponente.exibirCampo();
-            IO.println(nome + " está sscolhendo uma das suas cartas para atacar...");
+            IO.println(nome + " está escolhendo uma das suas cartas como alvo...");
+            Thread.sleep(1500);
+
             Integer escolhaAlvo = (int) (Math.random() * oponente.getCampo().size());
             Carta cartaDefensora = oponente.getCampo().get(escolhaAlvo);
             IO.println(nome + " escolheu atacar a carta: " + cartaDefensora.getNome());
@@ -133,10 +148,11 @@ public class Computador extends Duelista {
         }
     }
 
-    public void atacar(Duelista oponente, Carta alvo) {
+    public void atacar(Duelista oponente, Carta alvo) throws InterruptedException {
         IO.println("\nAção escolhida: Atacar");
         exibirCampo();
         IO.println(nome + " está escolhendo uma carta para atacar...");
+        Thread.sleep(1500);
 
         Carta cartaMaisForte = this.getCampo().getFirst();
 
@@ -151,24 +167,26 @@ public class Computador extends Duelista {
 
         IO.println("Há cartas no campo do oponente para defender.");
         oponente.exibirCampo();
-        IO.println(nome + " está sscolhendo uma das suas cartas para atacar...");
+        IO.println(nome + " está escolhendo uma das suas cartas como alvo...");
+        Thread.sleep(1500);
         IO.println(nome + " escolheu atacar a carta: " + alvo.getNome());
         oponente.receberAtaque(cartaAtacante, alvo, this);
     }
 
-    public Carta jogadaEspecial(Predicate<Carta> condicao) {
+    public Carta jogadaEspecial(Predicate<Carta> condicao) throws InterruptedException {
         for (Carta carta : mao) {
             if (condicao.test(carta)) {
                 return carta;
             }
         }
-
+        Thread.sleep(1000);
         return null;
     }
 
-    public void jogarCarta(Carta carta) {
+    public void jogarCarta(Carta carta) throws InterruptedException {
         IO.println("\nAção escolhida: Jogar carta");
         IO.println(nome + " está escolhendo uma carta para jogar...");
+        Thread.sleep(1500);
         Integer posicaoCartaEscolhida = 0;
 
         for (int i = 0; i < mao.size(); i++) {
@@ -192,6 +210,7 @@ public class Computador extends Duelista {
 
         List<Carta> cartasSacrificio = new ArrayList<>();
         IO.println(nome + " está escolhendo as cartas para sacrificar...");
+        Thread.sleep(1500);
 
         for (int i = 0; i < qtdSacrificios; i++) {
             Integer posicaoCartaSacrificio = (int) (Math.random() * todasAsCartas.size());
@@ -207,8 +226,10 @@ public class Computador extends Duelista {
         invocarCarta(carta, qtdSacrificios, cartasSacrificio);
     }
 
-    public void executarTurno(Duelista oponente) {
-        IO.println("\nO computador irá escolher uma ação...");
+    public void executarTurno(Duelista oponente) throws InterruptedException {
+        Thread.sleep(1500);
+        IO.println("O computador irá escolher uma ação...");
+        Thread.sleep(2200);
 
         if (mao.isEmpty() && campo.isEmpty()) {
             comprarCarta();
@@ -223,7 +244,7 @@ public class Computador extends Duelista {
         executarJogadaComCampo(oponente);
     }
 
-    private void executarJogadaInicial() {
+    private void executarJogadaInicial() throws InterruptedException {
         int semSacrificio = 0;
         int umSacrificio = 0;
         int doisSacrificios = 0;
@@ -252,7 +273,7 @@ public class Computador extends Duelista {
         }
     }
 
-    private void executarJogadaComCampo(Duelista oponente) {
+    private void executarJogadaComCampo(Duelista oponente) throws InterruptedException {
         if (!campo.isEmpty() && oponente.getCampo().isEmpty()) {
             atacar(oponente);
             return;

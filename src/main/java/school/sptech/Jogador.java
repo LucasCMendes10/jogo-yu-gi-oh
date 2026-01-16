@@ -8,7 +8,7 @@ public class Jogador extends Duelista {
         super(nome);
     }
 
-    public void montarBaralho(List<Carta> cartas) {
+    public void montarBaralho(List<Carta> cartas) throws InterruptedException {
         List<Integer> indicesCartasEscolhidas = new ArrayList<>();
 
         Integer tamanhoBaralho = Integer.valueOf(IO.readln("Escolha o tamanho do baralho (mínimo 5 cartas): "));
@@ -20,6 +20,7 @@ public class Jogador extends Duelista {
         if (tamanhoBaralho == cartas.size()) {
             IO.println("Você escolheu todas as cartas disponíveis para o baralho.");
             this.baralho.addAll(cartas);
+            Thread.sleep(1000);
             IO.println("Baralho montado com sucesso!");
             return;
         }
@@ -38,6 +39,8 @@ public class Jogador extends Duelista {
             indicesCartasEscolhidas.add(posicaoCartaEscolhida);
         }
 
+        IO.println("Seu baralho está sendo montado...");
+        Thread.sleep(1000);
         IO.println("Baralho montado com sucesso!");
     }
 
@@ -53,7 +56,7 @@ public class Jogador extends Duelista {
     }
 
     @Override
-    public void jogarCarta(List<Integer> posicoesCartasEscolhidas) {
+    public void jogarCarta(List<Integer> posicoesCartasEscolhidas) throws InterruptedException {
         if (mao.isEmpty()) {
             IO.println(nome + " não tem cartas na mão para jogar.");
             return;
@@ -78,6 +81,7 @@ public class Jogador extends Duelista {
         IO.println("É necessário sacrificar cartas para invocar " + cartaEscolhida.getNome());
         Integer qtdSacrificios = (cartaEscolhida.getQtdEstrela() == 5 || cartaEscolhida.getQtdEstrela() == 6) ? 1 : 2;
         IO.println("Essa carta precisa de " + qtdSacrificios + " sacrifício(s).");
+        Thread.sleep(1500);
         exibirMao();
         exibirCampo();
 
@@ -123,7 +127,7 @@ public class Jogador extends Duelista {
     }
 
     @Override
-    public void atacar(Duelista oponente) {
+    public void atacar(Duelista oponente) throws InterruptedException {
         if (campo.isEmpty()) {
             IO.println(nome + " não tem cartas no campo para atacar.");
             return;
@@ -133,15 +137,19 @@ public class Jogador extends Duelista {
         Integer posicaoCartaAtacante = Integer.valueOf(IO.readln("Escolha uma carta para atacar (1 a " + campo.size() + "): "));
         Carta cartaAtacante = campo.get(posicaoCartaAtacante - 1);
         IO.println(nome + " escolheu " + cartaAtacante.getNome() + " para atacar.");
+        Thread.sleep(1000);
 
         if (oponente.getCampo().isEmpty()) {
             IO.println(oponente.getNome() + " não tem cartas no campo para se defender.");
+            Thread.sleep(1000);
             oponente.receberAtaque(cartaAtacante);
         } else {
             IO.println("Há cartas no campo do oponente para defender.");
+            Thread.sleep(500);
             oponente.exibirCampo();
-            Integer escolhaAlvo = Integer.valueOf(IO.readln("Escolha uma dessas cartas para atacar (1 a " + oponente.getCampo().size() + "): "));
+            Integer escolhaAlvo = Integer.valueOf(IO.readln("Escolha uma dessas cartas como alvo (1 a " + oponente.getCampo().size() + "): "));
             Carta cartaDefensora = oponente.getCampo().get(escolhaAlvo - 1);
+            Thread.sleep(200);
             IO.println(nome + " escolheu atacar a carta: " + cartaDefensora.getNome());
             oponente.receberAtaque(cartaAtacante, cartaDefensora, this);
         }
