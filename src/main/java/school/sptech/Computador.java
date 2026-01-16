@@ -18,7 +18,9 @@ public class Computador extends Duelista {
 
     @Override
     public void comprarCarta() {
+        IO.println("\nAção escolhida: Comprar carta");
         if (!baralho.isEmpty()) {
+            IO.println(nome + " está comprando uma carta...");
             Carta cartaComprada = baralho.removeFirst();
             mao.add(cartaComprada);
             IO.println("Uma nova carta foi comprada por " + nome + ".");
@@ -29,6 +31,8 @@ public class Computador extends Duelista {
 
     @Override
     public void jogarCarta(List<Integer> posicoesCartasEscolhidas) {
+        IO.println("\nAção escolhida: Jogar carta");
+
         if (mao.isEmpty()) {
             IO.println(nome + " não tem cartas na mão para jogar.");
             return;
@@ -103,6 +107,7 @@ public class Computador extends Duelista {
 
     @Override
     public void atacar(Duelista oponente) {
+        IO.println("\nAção escolhida: Atacar");
         if (campo.isEmpty()) {
             IO.println(nome + " não tem cartas no campo para atacar.");
             return;
@@ -129,6 +134,7 @@ public class Computador extends Duelista {
     }
 
     public void atacar(Duelista oponente, Carta alvo) {
+        IO.println("\nAção escolhida: Atacar");
         exibirCampo();
         IO.println(nome + " está escolhendo uma carta para atacar...");
 
@@ -161,6 +167,7 @@ public class Computador extends Duelista {
     }
 
     public void jogarCarta(Carta carta) {
+        IO.println("\nAção escolhida: Jogar carta");
         IO.println(nome + " está escolhendo uma carta para jogar...");
         Integer posicaoCartaEscolhida = 0;
 
@@ -199,4 +206,93 @@ public class Computador extends Duelista {
 
         invocarCarta(carta, qtdSacrificios, cartasSacrificio);
     }
+
+    public void executarTurno(Duelista oponente) {
+        IO.println("\nO computador irá escolher uma ação...");
+
+        if (mao.isEmpty() && campo.isEmpty()) {
+            comprarCarta();
+            return;
+        }
+
+        if (!mao.isEmpty() && campo.isEmpty()) {
+            executarJogadaInicial();
+            return;
+        }
+
+        executarJogadaComCampo(oponente);
+    }
+
+    private void executarJogadaInicial() {
+        int semSacrificio = 0;
+        int umSacrificio = 0;
+        int doisSacrificios = 0;
+
+        for (Carta carta : mao) {
+            if (carta.getQtdEstrela() < 5) semSacrificio++;
+            else if (carta.getQtdEstrela() <= 6) umSacrificio++;
+            else doisSacrificios++;
+        }
+
+        if (doisSacrificios > 0 && semSacrificio >= 2) {
+            jogarCarta(jogadaEspecial(c -> c.getQtdEstrela() >= 7));
+            return;
+        }
+
+        if (umSacrificio > 0 && semSacrificio >= 1) {
+            jogarCarta(jogadaEspecial(c -> c.getQtdEstrela() == 5 || c.getQtdEstrela() == 6));
+            return;
+        }
+
+        Carta carta = jogadaEspecial(c -> c.getQtdEstrela() <= 4);
+        if (carta == null) {
+            comprarCarta();
+        } else {
+            jogarCarta(carta);
+        }
+    }
+
+    private void executarJogadaComCampo(Duelista oponente) {
+        if (!campo.isEmpty() && oponente.getCampo().isEmpty()) {
+            atacar(oponente);
+            return;
+        }
+
+        Carta alvo = escolherAlvoDerrotavel(oponente);
+
+        if (alvo != null) {
+            atacar(oponente, alvo);
+            return;
+        }
+
+        if (mao.isEmpty()) {
+            comprarCarta();
+        } else {
+            jogarCarta(new ArrayList<>());
+        }
+    }
+
+    private Carta escolherAlvoDerrotavel(Duelista oponente) {
+        List<Carta> derrotaveis = new ArrayList<>();
+
+        for (Carta atacante : campo) {
+            for (Carta defensora : oponente.getCampo()) {
+                if (atacante.getAtaque() > defensora.getDefesa()) {
+                    derrotaveis.add(defensora);
+                }
+            }
+        }
+
+        if (derrotaveis.isEmpty()) return null;
+
+        Carta maisFraca = derrotaveis.getFirst();
+        for (Carta carta : derrotaveis) {
+            if (carta.getDefesa() < maisFraca.getDefesa()) {
+                maisFraca = carta;
+            }
+        }
+
+        return maisFraca;
+    }
+
 }
