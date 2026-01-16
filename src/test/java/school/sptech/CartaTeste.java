@@ -70,4 +70,72 @@ class CartaTeste {
                 () -> assertTrue(resultado.contains("defesa"))
         );
     }
+
+    @Test
+    @DisplayName("criarCarta deve criar uma Carta válida quando todos os dados estiverem corretos")
+    void criarCartaComDadosValidos() {
+        Carta carta = Carta.criarCarta(
+                "Dragão Negro de Olhos Vermelhos",
+                7,
+                2400,
+                2000
+        );
+
+        assertAll(
+                () -> assertNotNull(carta),
+                () -> assertEquals("Dragão Negro de Olhos Vermelhos", carta.getNome()),
+                () -> assertEquals(7, carta.getQtdEstrela()),
+                () -> assertEquals(2400, carta.getAtaque()),
+                () -> assertEquals(2000, carta.getDefesa())
+        );
+    }
+
+    @Test
+    @DisplayName("criarCarta deve lançar exceções adequadas quando regras de validação forem violadas")
+    void criarCartaComDadosInvalidosDeveLancarExcecoes() {
+        
+        assertThrows(NullPointerException.class,
+                () -> Carta.criarCarta(null, 5, 1500, 1500),
+                "Nome não pode ser nulo");
+
+        assertThrows(IllegalArgumentException.class,
+                () -> Carta.criarCarta("", 5, 1500, 1500),
+                "Nome não pode ser vazio");
+
+        assertThrows(IllegalArgumentException.class,
+                () -> Carta.criarCarta("   ", 5, 1500, 1500),
+                "Nome não pode ser em branco");
+
+        assertThrows(NullPointerException.class,
+                () -> Carta.criarCarta("Carta", null, 1500, 1500),
+                "Quantidade de estrelas não pode ser nula");
+
+        assertThrows(IllegalArgumentException.class,
+                () -> Carta.criarCarta("Carta", 0, 1500, 1500),
+                "Quantidade de estrelas deve ser maior que zero");
+
+        assertThrows(IllegalArgumentException.class,
+                () -> Carta.criarCarta("Carta", -1, 1500, 1500),
+                "Quantidade de estrelas não pode ser negativa");
+
+        assertThrows(IllegalArgumentException.class,
+                () -> Carta.criarCarta("Carta", 13, 1500, 1500),
+                "Quantidade de estrelas não pode ser maior que 12");
+
+        assertThrows(NullPointerException.class,
+                () -> Carta.criarCarta("Carta", 5, null, 1500),
+                "Ataque não pode ser nulo");
+
+        assertThrows(IllegalArgumentException.class,
+                () -> Carta.criarCarta("Carta", 5, 99, 1500),
+                "Ataque não pode ser menor que 100");
+
+        assertThrows(NullPointerException.class,
+                () -> Carta.criarCarta("Carta", 5, 1500, null),
+                "Defesa não pode ser nula");
+
+        assertThrows(IllegalArgumentException.class,
+                () -> Carta.criarCarta("Carta", 5, 1500, 50),
+                "Defesa não pode ser menor que 100");
+    }
 }
