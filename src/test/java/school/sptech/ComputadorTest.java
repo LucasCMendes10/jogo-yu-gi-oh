@@ -233,4 +233,81 @@ public class ComputadorTest {
 
         assertEquals(1500, alvo.getPontosDeVida());
     }
+
+    @Test
+    @DisplayName("jogarCarta(Carta) sem sacrifício deve invocar corretamente")
+    void jogarCartaDiretaSemSacrificio() {
+        Computador cpu = new Computador("CPU");
+        Carta carta = cartaFraca();
+
+        cpu.getMao().add(carta);
+
+        cpu.jogarCarta(carta);
+
+        assertTrue(cpu.getMao().isEmpty());
+        assertEquals(1, cpu.getCampo().size());
+    }
+
+    @Test
+    @DisplayName("jogarCarta(Carta) com sacrifício deve invocar corretamente")
+    void jogarCartaDiretaComSacrificio() {
+        Computador cpu = new Computador("CPU");
+
+        Carta sacrificio = cartaFraca();
+        Carta invocada = cartaMedia();
+
+        cpu.getCampo().add(cartaFraca());
+        cpu.getCampo().add(sacrificio);
+        cpu.getMao().add(invocada);
+
+        cpu.jogarCarta(invocada);
+
+        assertEquals(1, cpu.getCampo().size());
+        assertTrue(cpu.getCampo().contains(invocada));
+    }
+
+    @Test
+    @DisplayName("Ataque contra carta defensora deve remover carta derrotada")
+    void ataqueComDefensor() {
+        Computador atacante = new Computador("ATK");
+        Computador defensor = new Computador("DEF");
+
+        Carta cartaAtacante = cartaForte();
+        Carta cartaDefensora = cartaFraca();
+
+        atacante.getCampo().add(cartaAtacante);
+        defensor.getCampo().add(cartaDefensora);
+
+        atacante.atacar(defensor);
+
+        assertTrue(defensor.getCampo().isEmpty(),
+                "Carta defensora deveria ser destruída");
+    }
+
+    @Test
+    @DisplayName("executarTurno deve comprar carta quando mão e campo estão vazios")
+    void executarTurnoComTudoVazio() {
+        Computador cpu = new Computador("CPU");
+        Computador oponente = new Computador("OP");
+
+        cpu.getBaralho().add(cartaFraca());
+
+        cpu.executarTurno(oponente);
+
+        assertEquals(1, cpu.getMao().size());
+    }
+
+    @Test
+    @DisplayName("executarTurno deve atacar quando oponente não tem campo")
+    void executarTurnoAtacaDireto() {
+        Computador cpu = new Computador("CPU");
+        Computador alvo = new Computador("ALVO");
+
+        cpu.getCampo().add(cartaMedia());
+
+        cpu.executarTurno(alvo);
+
+        assertTrue(alvo.getPontosDeVida() < 4000,
+                "Oponente deveria sofrer dano direto");
+    }
 }
