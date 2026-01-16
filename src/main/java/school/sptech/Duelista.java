@@ -91,8 +91,8 @@ public abstract class Duelista {
             IO.println(nome + " permanece com " + pontosDeVida + " pontos de vida.");
 
         } else {
-            campo.remove(cartaDefensora);
-            campo.remove(cartaAtacante);
+            this.campo.remove(cartaDefensora);
+            atacante.getCampo().remove(cartaAtacante);
             IO.println("Ambas as cartas têm força igual. Ambas foram destruídas!");
             IO.println("Ambos jogadores mantêm seus pontos de vida.");
         }
