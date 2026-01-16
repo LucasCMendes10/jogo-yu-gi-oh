@@ -30,7 +30,7 @@ public class Carta {
     }
 
     private static Boolean validacoesIllegalArgument(String nome, Integer qtdEstrela, Integer ataque, Integer defesa) {
-        return nome.isBlank() || qtdEstrela <= 0 || qtdEstrela > 12 || ataque < 100 || defesa < 100;
+        return nome.isBlank() || qtdEstrela <= 0 || qtdEstrela > 12 || ataque < 0 || defesa < 0;
     }
 
     public String getNome() {

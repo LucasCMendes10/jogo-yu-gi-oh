@@ -127,15 +127,15 @@ class CartaTest {
                 "Ataque não pode ser nulo");
 
         assertThrows(IllegalArgumentException.class,
-                () -> Carta.criarCarta("Carta", 5, 99, 1500),
-                "Ataque não pode ser menor que 100");
+                () -> Carta.criarCarta("Carta", 5, -99, 1500),
+                "Ataque não pode ser menor que 0");
 
         assertThrows(NullPointerException.class,
                 () -> Carta.criarCarta("Carta", 5, 1500, null),
                 "Defesa não pode ser nula");
 
         assertThrows(IllegalArgumentException.class,
-                () -> Carta.criarCarta("Carta", 5, 1500, 50),
-                "Defesa não pode ser menor que 100");
+                () -> Carta.criarCarta("Carta", 5, 1500, -50),
+                "Defesa não pode ser menor que 0");
     }
 }
