@@ -21,7 +21,7 @@ public class ComputadorTest {
     }
 
     private Carta cartaForte() {
-        return Carta.criarCarta("Dragão Branco", 8, 3000, 2500);
+        return Carta.criarCarta("Dragão Branco de Olhos Azuis", 8, 3000, 2500);
     }
 
     @Test
@@ -52,7 +52,7 @@ public class ComputadorTest {
     }
 
     @Test
-    @DisplayName("Montar baralho deve adicionar exatamente o tamanho informado")
+    @DisplayName("Montar baralho deve adicionar exatamente o tamanho informado pelo jogador")
     void montarBaralhoCorretamente() {
         Computador cpu = new Computador("CPU");
 
@@ -128,7 +128,7 @@ public class ComputadorTest {
     }
 
     @Test
-    @DisplayName("Não deve travar se posição sorteada já tiver sido escolhida")
+    @DisplayName("Não deve travar se todas as posições possíveis de serem sorteadas já tiverem sido escolhidas")
     void naoDeveTravarComPosicaoRepetida() {
         Computador cpu = new Computador("CPU");
         cpu.getMao().add(cartaFraca());
