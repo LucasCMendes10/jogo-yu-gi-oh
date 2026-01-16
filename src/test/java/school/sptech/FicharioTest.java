@@ -8,7 +8,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Testes da classe Fichario")
-public class FicharioTest {
+class FicharioTest {
 
     @Test
     @DisplayName("Construtor deve inicializar o fichário com lista de cartas vazia")

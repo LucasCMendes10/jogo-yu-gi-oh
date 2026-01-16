@@ -11,7 +11,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Testes da classe Duelista")
-public class DuelistaTest {
+class DuelistaTest {
 
     @Test
     @DisplayName("Classe Duelista deve ser abstrata")
