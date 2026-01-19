@@ -90,7 +90,7 @@ public class Jogador extends Duelista {
         todasAsCartas.addAll(campo);
 
         if (todasAsCartas.size() < (qtdSacrificios + 1)) {
-            IO.println(nome + " não tem cartas suficientes na mão ou no campo para serem sacrificas.");
+            IO.println(nome + " não tem cartas suficientes na mão ou no campo para serem sacrificadas.");
 
             Integer monstroSemPrecisarSacrificio = 0;
 

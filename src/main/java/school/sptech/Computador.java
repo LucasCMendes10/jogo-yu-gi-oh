@@ -245,22 +245,24 @@ public class Computador extends Duelista {
     }
 
     private void executarJogadaInicial() throws InterruptedException {
-        int semSacrificio = 0;
-        int umSacrificio = 0;
-        int doisSacrificios = 0;
+        int qtdSemSacrificio = 0;
+        int qtdUmSacrificio = 0;
+        int qtdDoisSacrificios = 0;
 
         for (Carta carta : mao) {
-            if (carta.getQtdEstrela() < 5) semSacrificio++;
-            else if (carta.getQtdEstrela() <= 6) umSacrificio++;
-            else doisSacrificios++;
+            if (carta.getQtdEstrela() < 5) qtdSemSacrificio++;
+            else if (carta.getQtdEstrela() <= 6) qtdUmSacrificio++;
+            else qtdDoisSacrificios++;
         }
 
-        if (doisSacrificios > 0 && semSacrificio >= 2) {
+        int qtdTotal = qtdSemSacrificio + qtdUmSacrificio + qtdDoisSacrificios;
+
+        if (qtdDoisSacrificios > 0 && qtdTotal > 2) {
             jogarCarta(jogadaEspecial(c -> c.getQtdEstrela() >= 7));
             return;
         }
 
-        if (umSacrificio > 0 && semSacrificio >= 1) {
+        if (qtdUmSacrificio > 0 && qtdTotal > 1) {
             jogarCarta(jogadaEspecial(c -> c.getQtdEstrela() == 5 || c.getQtdEstrela() == 6));
             return;
         }
