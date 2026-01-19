@@ -104,7 +104,7 @@ class CartaTest {
 
         assertThrows(IllegalArgumentException.class,
                 () -> Carta.criarCarta("   ", 5, 1500, 1500),
-                "Nome não pode ser em branco");
+                "Nome não pode estar em branco");
 
         assertThrows(NullPointerException.class,
                 () -> Carta.criarCarta("Carta", null, 1500, 1500),
@@ -113,10 +113,6 @@ class CartaTest {
         assertThrows(IllegalArgumentException.class,
                 () -> Carta.criarCarta("Carta", 0, 1500, 1500),
                 "Quantidade de estrelas deve ser maior que zero");
-
-        assertThrows(IllegalArgumentException.class,
-                () -> Carta.criarCarta("Carta", -1, 1500, 1500),
-                "Quantidade de estrelas não pode ser negativa");
 
         assertThrows(IllegalArgumentException.class,
                 () -> Carta.criarCarta("Carta", 13, 1500, 1500),

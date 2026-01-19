@@ -23,7 +23,7 @@ class DuelistaTest {
     }
 
     @Test
-    @DisplayName("Construtor deve inicializar duelista com valores padrão corretos")
+    @DisplayName("Construtor deve inicializar duelista com valores padrões corretos")
     void construtorDeveInicializarValoresPadrao() {
         Duelista duelista = new DuelistaFake("Yugi");
 

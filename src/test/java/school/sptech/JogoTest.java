@@ -10,6 +10,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class JogoTest {
 
     @Test
+    @DisplayName("Jogo deve possuir atributos fichario, jogador, computador e jogoEmAndamento")
+    void jogoDevePossuirAtributos() throws NoSuchFieldException {
+        Class<Jogo> classe = Jogo.class;
+        classe.getDeclaredField("fichario");
+        classe.getDeclaredField("jogador");
+        classe.getDeclaredField("computador");
+        classe.getDeclaredField("jogoEmAndamento");
+    }
+
+    @Test
     @DisplayName("Construtor deve inicializar jogo corretamente")
     void construtorDeveInicializarJogo() {
         Jogador jogador = new Jogador("Yugi");
@@ -18,6 +28,21 @@ class JogoTest {
         Jogo jogo = new Jogo(jogador, computador);
 
         assertNotNull(jogo, "Jogo não deve ser nulo após construção");
+    }
+
+    @Test
+    @DisplayName("Jogo deve iniciar em andamento")
+    void jogoDeveIniciarEmAndamento() throws Exception {
+        Jogador jogador = new Jogador("Yugi");
+        Computador computador = new Computador("CPU");
+        Jogo jogo = new Jogo(jogador, computador);
+
+        var field = Jogo.class.getDeclaredField("jogoEmAndamento");
+        field.setAccessible(true);
+
+        Boolean emAndamento = (Boolean) field.get(jogo);
+
+        assertTrue(emAndamento, "Jogo deveria iniciar em andamento");
     }
 
     @Test
@@ -56,21 +81,6 @@ class JogoTest {
 
         assertTrue(computador.getPontosDeVida() <= 0,
                 "Computador deveria estar derrotado");
-    }
-
-    @Test
-    @DisplayName("Jogo deve iniciar em andamento")
-    void jogoDeveIniciarEmAndamento() throws Exception {
-        Jogador jogador = new Jogador("Yugi");
-        Computador computador = new Computador("CPU");
-        Jogo jogo = new Jogo(jogador, computador);
-
-        var field = Jogo.class.getDeclaredField("jogoEmAndamento");
-        field.setAccessible(true);
-
-        Boolean emAndamento = (Boolean) field.get(jogo);
-
-        assertTrue(emAndamento, "Jogo deveria iniciar em andamento");
     }
 
     @Test

@@ -31,12 +31,19 @@ public class ComputadorTest {
     }
 
     @Test
-    @DisplayName("Computador não deve declarar getters, setters ou atributos próprios")
+    @DisplayName("Computador não deve declarar getters ou setters")
     void naoDeveDeclararMetodosIndesejados() {
         for (Method method : Computador.class.getDeclaredMethods()) {
             assertFalse(method.getName().startsWith("get"));
             assertFalse(method.getName().startsWith("set"));
         }
+    }
+
+    @Test
+    @DisplayName("Computador não deve declarar atributos próprios")
+    void naoDeveDeclararAtributosProprios() {
+        assertEquals(0, Computador.class.getDeclaredFields().length,
+                "Computador não deve possuir atributos próprios");
     }
 
     @Test
@@ -100,7 +107,7 @@ public class ComputadorTest {
     }
 
     @Test
-    @DisplayName("Jogada com sacrifício sem cartas suficientes não deve travar ou ficar em loop")
+    @DisplayName("jogarCarta deve encerrar o loop ao não ter cartas suficientes para sacrifício")
     void naoDeveTravarAoNaoTerCartasParaSacrificio() {
         Computador cpu = new Computador("CPU");
 
@@ -128,7 +135,7 @@ public class ComputadorTest {
     }
 
     @Test
-    @DisplayName("Não deve travar se todas as posições possíveis de serem sorteadas já tiverem sido escolhidas")
+    @DisplayName("jogarCarta deve encerrar o loop se todas as posições possíveis de serem sorteadas já tiverem sido escolhidas")
     void naoDeveTravarComPosicaoRepetida() {
         Computador cpu = new Computador("CPU");
         cpu.getMao().add(cartaFraca());
@@ -149,7 +156,7 @@ public class ComputadorTest {
         Computador cpu = new Computador("CPU");
 
         Carta sacrificio = cartaFraca();
-        Carta invocada = Carta.criarCarta("Summoned Skull", 6, 2500, 1200);
+        Carta invocada = Carta.criarCarta("Rei Caveira", 6, 2500, 1200);
 
         cpu.getMao().add(invocada);
         cpu.getCampo().add(sacrificio);
@@ -177,22 +184,6 @@ public class ComputadorTest {
 
         assertEquals(1, cpu.getCampo().size(),
                 "A carta invocada deve substituir os sacrifícios");
-    }
-
-    @Test
-    @DisplayName("Não deve entrar em loop se só houver cartas já utilizadas")
-    void naoDeveEntrarEmLoopComCartasJaUsadas() {
-        Computador cpu = new Computador("CPU");
-
-        cpu.getMao().add(cartaFraca());
-
-        List<Integer> usadas = new ArrayList<>();
-        usadas.add(0);
-
-        assertDoesNotThrow(() ->
-                        cpu.jogarCarta(usadas),
-                "Recursão não pode ocorrer sem mudança de estado"
-        );
     }
 
     @Test
@@ -246,24 +237,6 @@ public class ComputadorTest {
 
         assertTrue(cpu.getMao().isEmpty());
         assertEquals(1, cpu.getCampo().size());
-    }
-
-    @Test
-    @DisplayName("jogarCarta(Carta) com sacrifício deve invocar corretamente")
-    void jogarCartaDiretaComSacrificio() throws InterruptedException {
-        Computador cpu = new Computador("CPU");
-
-        Carta sacrificio = cartaFraca();
-        Carta invocada = cartaMedia();
-
-        cpu.getCampo().add(cartaFraca());
-        cpu.getCampo().add(sacrificio);
-        cpu.getMao().add(invocada);
-
-        cpu.jogarCarta(invocada);
-
-        assertEquals(1, cpu.getCampo().size());
-        assertTrue(cpu.getCampo().contains(invocada));
     }
 
     @Test

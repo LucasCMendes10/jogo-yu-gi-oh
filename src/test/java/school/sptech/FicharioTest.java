@@ -106,6 +106,6 @@ class FicharioTest {
         List<Carta> cartas = fichario.getCartas();
 
         assertEquals(1, cartas.size());
-        assertSame(carta, cartas.get(0));
+        assertSame(carta, cartas.getFirst());
     }
 }
