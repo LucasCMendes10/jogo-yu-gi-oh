@@ -1,116 +1,102 @@
-Orientações Gerais: 🚨
+# Orientações Gerais 🚨
 
-Utilize apenas tipos wrapper para criar atributos e métodos.
-Respeite os nomes de atributos e métodos definidos no exercício.
-Tome cuidado com os argumentos especificados no exercício. Não adicione argumentos não solicitados e mantenha a ordem definida no enunciado.
-Verifique se não há erros de compilação no projeto antes de enviar.
-As classes devem seguir as regras de encapsulamento.
+- Utilize apenas **tipos wrapper** para criar atributos e métodos.
+- Respeite **rigorosamente** os nomes de atributos e métodos definidos no exercício.
+- Tome cuidado com os **argumentos especificados** no exercício:
+    - Não adicione argumentos não solicitados.
+    - Mantenha a **ordem definida** no enunciado.
+- Verifique se **não há erros de compilação** no projeto antes de enviar.
+- As classes devem seguir corretamente as **regras de encapsulamento**.
 
-📘 Enunciado do Projeto – Sistema de Duelo de Cartas
+---
 
-🎯 Objetivo Geral
+# 📘 Sistema de Duelo de Cartas
 
-Desenvolver um sistema de duelo de cartas, inspirado no jogo de batalha por turnos chamado Monstro de Duelo, onde duelistas utilizam cartas com atributos de ataque, defesa e estrelas para invocar monstros, atacar o oponente e reduzir seus pontos de vida até a vitória.
+## 🎯 Objetivo Geral
 
-O sistema deve ser totalmente orientado a objetos, respeitar herança, encapsulamento e conter regras de negócio bem definidas para criação de cartas, montagem de baralhos, invocação, sacrifícios e batalhas.
+Desenvolver um sistema de duelo de cartas, inspirado no jogo de batalha por turnos **Monstros de Duelo**, onde duelistas utilizam cartas com atributos de ataque, defesa e estrelas para invocar monstros, atacar o oponente e reduzir seus pontos de vida até a vitória.
 
-OBS: o objetivo não é criar o jogo completo, mas sim um sistema que modele as principais funcionalidades e regras do duelo de cartas, de forma muito simplificada. Caso queira implementar as regras do jogo real aqui, faça isso depois de ter entregado a atividade, para que os testes não falhem.
+> **OBS:**  
+> O objetivo não é criar o jogo completo, mas sim um sistema que modele as principais funcionalidades e regras do duelo de cartas, de forma muito simplificada. Caso queira implementar as regras do jogo real aqui, faça isso depois de ter entregado a atividade, para que os testes não falhem.
 
-🃏 Classe Carta
+---
 
-📌 Responsabilidade
+# 🃏 Classe Carta
 
-A classe Carta representa uma unidade básica do jogo, sendo o elemento central de todas as ações realizadas pelos duelistas.
-Uma carta possui atributos fixos e não mutáveis após sua criação, garantindo consistência durante toda a partida.
+## 📌 Responsabilidade
 
-🧱 Atributos
+A classe `Carta` representa uma unidade básica do jogo, sendo o elemento central de todas as ações realizadas pelos duelistas.
 
-A classe Carta deve possuir exatamente os seguintes atributos privados:
+---
 
-String nome
-Nome da carta.
+## 🧱 Atributos
 
-Integer qtdEstrela
-Quantidade de estrelas da carta, utilizada para definir regras de invocação e sacrifício.
+A classe `Carta` deve possuir exatamente os seguintes atributos privados:
 
-Integer ataque
-Valor de ataque da carta, utilizado durante batalhas ofensivas.
+- `String nome`  
+  Nome da carta.
 
-Integer defesa
-Valor de defesa da carta, utilizado durante batalhas defensivas.
+- `Integer qtdEstrela`  
+  Quantidade de estrelas da carta, utilizada para definir regras de invocação e sacrifício.
 
-🔨 Construtor
+- `Integer ataque`  
+  Valor de ataque da carta, utilizado durante batalhas ofensivas.
 
+- `Integer defesa`  
+  Valor de defesa da carta, utilizado durante batalhas defensivas.
+
+---
+
+## 🔨 Construtor
+
+Esse construtor precisa ser público por causa dos testes, mas **não deve ser utilizado diretamente** para criar cartas no sistema. Utilize o método de fábrica para isso.
+
+```
 public Carta(String nome, Integer qtdEstrela, Integer ataque, Integer defesa)
+```
+---
 
-📌 Importante:
+## 🏭 Método de Fábrica
 
-O construtor não realiza validações. Ele existe apenas para inicialização interna dos atributos.
-Toda validação de regras de negócio deve ser feita antes, através do método de fábrica.
-
-🏭 Método de Fábrica
-
+```
 public static Carta criarCarta(String nome, Integer qtdEstrela, Integer ataque, Integer defesa)
+```
 
-Este é o único meio permitido para criação válida de cartas no sistema.
+**Este é o único meio permitido para criação válida de cartas no sistema.**
 
-📜 Regras de Negócio – Validações Obrigatórias
+### Validações Obrigatórias:
 
-❌ Validações que devem lançar NullPointerException
+- Validações que devem lançar **NullPointerException**:
+    - nome
+    - qtdEstrela
+    - ataque
+    - defesa
 
-O método deve lançar NullPointerException caso qualquer um dos parâmetros abaixo seja null:
 
-nome
+- Validações que devem lançar **IllegalArgumentException**:
+  - **nome** não pode ser:
+    - vazio ("")
+    - composto apenas por espaços
+    - texto em branco (isBlank())
+  - **qtdEstrela**:
+    - deve ser maior que 0
+    - deve ser menor ou igual a 12
+  - **ataque**:
+    - não pode ser negativo
+  - **defesa**:
+    - não pode ser negativa
 
-qtdEstrela
+---
 
-ataque
+## 🔎 Getters e toString
 
-defesa
+A classe deve expor somente métodos de leitura, não sendo permitido alterar atributos após a criação da carta, ou seja, **não deve haver setters**.
+E o toString() pode ser customizado da maneira que preferir, portanto que tenha todas as informações da Carta.
 
-📌 Justificativa:
-Esses atributos são obrigatórios para o funcionamento do jogo e não podem ser omitidos.
-
-❌ Validações que devem lançar IllegalArgumentException
-
-O método deve lançar IllegalArgumentException caso qualquer uma das regras abaixo seja violada:
-
-nome não pode ser:
-
-vazio ("")
-
-composto apenas por espaços
-
-texto em branco (isBlank())
-
-qtdEstrela:
-
-deve ser maior que 0
-
-deve ser menor ou igual a 12
-
-ataque:
-
-não pode ser negativo
-
-defesa:
-
-não pode ser negativa
-
-📌 Essas regras garantem:
-
-coerência do jogo
-
-integridade das batalhas
-
-impossibilidade de cartas inválidas entrarem no sistema
-
-🔎 Métodos de Acesso (Getters)
-
-A classe deve expor somente métodos de leitura, não sendo permitido alterar atributos após a criação da carta, ou seja, não deve haver setters.
-E crie o toString(), customize a maneira de exibir como preferir.
+---
 
 🗂️ Classe Fichario
+
 📌 Responsabilidade
 
 A classe Fichario representa um repositório organizado de cartas disponíveis, funcionando como uma coleção controlada onde cartas podem ser adicionadas, removidas e exibidas.
