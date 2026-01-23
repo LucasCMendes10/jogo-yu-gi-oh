@@ -31,18 +31,16 @@ A classe `Carta` representa uma unidade básica do jogo, sendo o elemento centra
 
 ## 🧱 Atributos
 
-A classe `Carta` deve possuir exatamente os seguintes atributos privados:
-
-- `String nome`  
+- `private String nome`  
   Nome da carta.
 
-- `Integer qtdEstrela`  
+- `private Integer qtdEstrela`  
   Quantidade de estrelas da carta, utilizada para definir regras de invocação e sacrifício.
 
-- `Integer ataque`  
+- `private Integer ataque`  
   Valor de ataque da carta, utilizado durante batalhas ofensivas.
 
-- `Integer defesa`  
+- `private Integer defesa`  
   Valor de defesa da carta, utilizado durante batalhas defensivas.
 
 ---
@@ -95,96 +93,75 @@ E o toString() pode ser customizado da maneira que preferir, portanto que tenha 
 
 ---
 
-🗂️ Classe Fichario
+# 🗂️ Classe Fichario
 
-📌 Responsabilidade
+## 📌 Responsabilidade
 
 A classe Fichario representa um repositório organizado de cartas disponíveis, funcionando como uma coleção controlada onde cartas podem ser adicionadas, removidas e exibidas.
 
-Ela não executa lógica de jogo, não compra cartas, não ataca, não invoca monstros.
-Seu papel é armazenar e disponibilizar cartas, nada além disso.
+---
 
-🧱 Atributos
+## 🧱 Atributos
 
-A classe deve possuir exatamente um atributo privado:
+- `private List<Carta> cartas`
 
-private List<Carta> cartas;
+    Lista interna que armazena as cartas disponíveis no fichário.
+---
 
-🔨 Construtor
+## 🔨 Construtor
+```
 public Fichario()
+```
+Deve inicializar a lista cartas vazia
 
-Comportamento esperado:
+---
 
-Deve inicializar a lista cartas
+## ⚙️ Métodos
 
-A lista deve começar vazia
-
-Nenhum parâmetro deve ser exigido
-
+```
 public void adicionarCarta(Carta novaCarta)
-Comportamento:
+```
 Adiciona a carta recebida à lista interna
 
-Não realiza validações adicionais
+---
 
-A ordem de inserção deve ser preservada
-
-adicionarCartas (varargs)
+```
 public void adicionarCartas(Carta... novasCartas)
-
-Comportamento:
-
+```
 Deve adicionar todas as cartas recebidas
 
-Deve reutilizar o método adicionarCarta
+---
 
-Deve respeitar a ordem dos argumentos
-
-removerCarta
+```
 public void removerCarta(Carta carta)
+```
 
-Comportamento:
+Remove a carta informada da lista, caso a carta não exista, nada deve acontecer
 
-Remove a carta informada da lista
+---
 
-Caso a carta não exista, nada deve acontecer
-
-Não deve lançar exceções
-
-removerCartas (varargs)
+```
 public void removerCartas(Carta... novasCartas)
+```
 
-Comportamento:
+Deve remover todas as cartas informadas, caso a carta não exista, nada deve acontecer
 
-Deve remover todas as cartas informadas
+---
 
-Deve reutilizar o método removerCarta
-
-Deve funcionar corretamente mesmo se algumas cartas não existirem
-
-exibirCartasDisponiveis
+```
 public void exibirCartasDisponiveis()
+```
 
-Comportamento esperado:
+Deve imprimir no console a lista numerada de cartas, começando com 1, e 
+cada carta deve ser exibida utilizando o toString() da classe Carta
 
-Deve imprimir no console:
+---
 
-Um título indicando que são cartas disponíveis
+## 🔎 Getters
 
-A lista numerada de cartas
+A classe deve expor somente métodos de leitura, não sendo permitido alterar atributos após a criação da carta, ou seja, **não deve haver setters**.
 
-A numeração deve começar em 1
-
-Cada carta deve ser exibida utilizando o toString() da classe Carta
-
-getCartas
-public List<Carta> getCartas()
-
-Comportamento:
-
-Retorna a lista interna de cartas
-
-A lista retornada representa o estado atual do fichário
+---
 
 ⚔️ Classe Duelista
 📌 Papel no Sistema
