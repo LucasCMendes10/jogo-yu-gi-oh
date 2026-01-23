@@ -31,17 +31,13 @@ A classe `Carta` representa uma unidade básica do jogo, sendo o elemento centra
 
 ## 🧱 Atributos
 
-- `private String nome`  
-  Nome da carta.
+- `private String nome`
 
 - `private Integer qtdEstrela`  
-  Quantidade de estrelas da carta, utilizada para definir regras de invocação e sacrifício.
 
 - `private Integer ataque`  
-  Valor de ataque da carta, utilizado durante batalhas ofensivas.
 
 - `private Integer defesa`  
-  Valor de defesa da carta, utilizado durante batalhas defensivas.
 
 ---
 
@@ -105,7 +101,6 @@ A classe Fichario representa um repositório organizado de cartas disponíveis, 
 
 - `private List<Carta> cartas`
 
-    Lista interna que armazena as cartas disponíveis no fichário.
 ---
 
 ## 🔨 Construtor
@@ -163,85 +158,52 @@ A classe deve expor somente métodos de leitura, não sendo permitido alterar at
 
 ---
 
-⚔️ Classe Duelista
-📌 Papel no Sistema
+# ⚔️ Classe Duelista (Abstrata)
 
-Duelista é uma classe base abstrata que representa qualquer entidade capaz de duelar:
+## 📌 Responsabilidade
 
-Jogador humano
+Duelista é uma **classe abstrata** que representa qualquer entidade capaz de duelar.
 
-Computador
+---
 
-Qualquer futura IA, NPC ou modo especial
+## 🧱 Atributos
 
-Ela define as regras comuns, o estado compartilhado e o contrato que os filhos devem respeitar.
+- `protected String nome`
 
-🧱 Atributos Obrigatórios
+- `protected int pontosDeVida`
 
-Um Duelista sempre deve possuir:
+- `protected List<Carta> baralho`
 
-protected String nome;
-protected int pontosDeVida;
-protected Deque<Carta> baralho;
-protected List<Carta> mao;
-protected List<Carta> campo;
+- `protected List<Carta> mao`
 
-Regras inegociáveis:
+- `protected List<Carta> campo`
+---
 
-pontosDeVida inicia em 4000
+## 🔨 Construtor
 
-baralho deve permitir remoção pelo início (removeFirst)
-
-mao representa cartas na mão
-
-campo representa cartas invocadas
-
-🔨 Construtor
+```
 public Duelista(String nome)
+```
 
-Comportamento esperado:
+Recebe apenas o nome do duelista e inicializa os demais atributos conforme abaixo:
+- pontosDeVida inicia com 4000
+- baralho inicia como lista vazia
+- mao inicia como lista vazia
+- campo inicia como lista vazia
 
-Inicializa:
+---
 
-nome
+## 🔎 Getters
 
-pontosDeVida = 4000
+A classe deve expor somente métodos de leitura, não sendo permitido alterar atributos após a criação da carta, ou seja, **não deve haver setters**.
 
-baralho vazio
+---
 
-mao vazia
+## ⚙️ Métodos
 
-campo vazio
-
-🔨 Construtor
-public Duelista(String nome)
-
-Comportamento esperado:
-
-Inicializa:
-
-nome
-
-pontosDeVida = 4000
-
-baralho vazio
-
-mao vazia
-
-campo vazio
-
-🔎 Getters Permitidos
-
-A classe pode e deve expor:
-
-getNome()
-getPontosDeVida()
-getBaralho()
-getMao()
-getCampo()
-
-🎴 Jogar Carta (invocação manual)
+```
 public void jogarCarta(List<Integer> posicoesCartasEscolhidas)
+```
 
 Regras:
 
@@ -259,9 +221,9 @@ Regras de sacrifício
 
 Estrelas da carta
 
-🩸 Sacrifício
-Método fundamental:
+```
 protected boolean precisaDeSacrifio(Carta carta)
+```
 
 Estrelas	Sacrifícios
 ≤ 4	0
@@ -271,9 +233,9 @@ Estrelas	Sacrifícios
 📌 Regra absoluta do jogo.
 Nunca deve ser duplicada em outro lugar.
 
-🐲 Invocação
-Sem sacrifício
+```
 protected void invocarCarta(Carta carta)
+```
 
 
 Remove da mão
@@ -292,9 +254,9 @@ Remove a carta invocada da mão
 
 Adiciona a carta invocada ao campo
 
-⚔️ Ataque
-Ataque direto
+```
 public void receberAtaque(Carta atacante)
+```
 
 
 Reduz pontosDeVida pelo ataque da carta
