@@ -221,6 +221,8 @@ Regras de sacrifício
 
 Estrelas da carta
 
+---
+
 ```
 protected boolean precisaDeSacrifio(Carta carta)
 ```
@@ -233,10 +235,11 @@ Estrelas	Sacrifícios
 📌 Regra absoluta do jogo.
 Nunca deve ser duplicada em outro lugar.
 
+---
+
 ```
 protected void invocarCarta(Carta carta)
 ```
-
 
 Remove da mão
 
@@ -254,18 +257,21 @@ Remove a carta invocada da mão
 
 Adiciona a carta invocada ao campo
 
+---
+
 ```
 public void receberAtaque(Carta atacante)
 ```
-
 
 Reduz pontosDeVida pelo ataque da carta
 
 Nunca deixa vida negativa causar erro
 
-Ataque entre monstros
-public void receberAtaque(Carta atacante, Carta defensora, Duelista atacanteDuelista)
+---
 
+```
+public void receberAtaque(Carta atacante, Carta defensora, Duelista atacanteDuelista)
+```
 
 Casos possíveis:
 
