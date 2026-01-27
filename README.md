@@ -531,3 +531,5 @@ Regra clara:
 Só considera cartas que podem ser derrotadas
 
 Prioriza a mais fraca
+
+# TODO: deixar claro que os métodos precisam ter mensagens claras no console para saber o que ocorre no jogo.
